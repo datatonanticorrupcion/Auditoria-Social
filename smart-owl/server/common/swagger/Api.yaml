@@ -1,0 +1,73 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: myapp
+  description: auditoria-social-api
+basePath: /api/v1
+tags:
+  - name: Projects
+    description: Simple projects endpoints
+  - name: Specification
+    description: The swagger API specification
+
+consumes:
+  - application/json
+produces:
+  - application/json
+  - text/plain
+
+
+definitions:
+  ProjectBody:
+    type: object
+    title: example
+    required:
+      - name
+    properties:
+      lat:
+        type: number
+        example: no_stress
+
+paths:
+  /projects/{lat}/{lon}/{radio}:
+    get:
+      tags:
+        - Projects
+      parameters:
+        - name: lat
+          in: path
+          required: true
+          description: The latitude of the example to retrieve
+          type: number
+        - name: lon
+          in: path
+          required: true
+          description: The longitude of the example to retrieve
+          type: number
+        - name: radio
+          in: path
+          required: true
+          description: The radio of the nearby locations
+          type: number
+      
+      responses:
+        200:
+          description: Return the example with the specified location.
+        404:
+          description: Example not found
+
+  /spec:
+    get:
+      tags:
+        - Specification
+      responses:
+        200:
+          description: Return the API specification
+  
+  /map:
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
